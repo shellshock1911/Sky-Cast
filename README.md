@@ -1,4 +1,4 @@
-# Machine Learning Engineer Nanodegree
+# Sky Cast
 ## Capstone Proposal
 
 Franklin Bradfield  
@@ -43,7 +43,7 @@ One aspect of the data that adds a challenge to this project is getting access t
 
 ### Benchmark Model
 
-ARIMA with a simple configuration of *{p = 12, d = 1, and q = 2}* will serve as the baseline statistical model to compare the performance of RNNs against. Explanation of why these values were chosen is out of the scope of this proposal, but will be explained in the report. Note that the chosen set of parameters is not necessarily the optimum, but merely a baseline from which future comparisions can be made. As can be seen in the charts below, the performance of the baseline model is mixed. The R-Squared column shows that it performs exceptionally well on the metrics for Delta-Atlanta, however it is not all that impressive for United-Chicago and American-Dallas/Fort-Worth.
+ARIMA with a simple configuration of *{p = 12, d = 1, and q = 2}* will serve as the baseline statistical model to compare the performance of RNNs against. An explanation of why these values were chosen is out of the scope of this proposal, but will be explained in the report. Note that the chosen set of parameters is not necessarily the optimum, but merely a baseline from which future comparisions can be made. As can be seen in the charts below, the performance of the baseline model is mixed. The R-Squared column shows that it performs exceptionally well on the metrics for Delta-Atlanta, however it is not all that impressive for United-Chicago and American-Dallas/Fort-Worth.
 
 **Delta-Atlanta**
 
