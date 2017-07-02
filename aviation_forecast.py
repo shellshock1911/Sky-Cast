@@ -52,7 +52,7 @@ def test_stationarity(time_series):
         test_output['Critical Value {}'.format(key)] = value
     print(test_output)
     
-def difference(dataset, lag=1):
+def _difference(dataset, lag=1):
     
     difference = list()
     for i in range(lag, len(dataset)):
@@ -60,7 +60,7 @@ def difference(dataset, lag=1):
         difference.append(value)
     return np.array(difference)
 
-def revert_difference(history, pred, lag=1):
+def _revert_difference(history, pred, lag=1):
     return pred + history[-lag]
 
 def predict_final_year(time_series, order=(12,1,2), search=False):
@@ -70,13 +70,13 @@ def predict_final_year(time_series, order=(12,1,2), search=False):
     
     data = time_series.values
     train, test = data[:-12], data[-12:]
-    differenced = difference(train, lag=12)
+    differenced = _difference(train, lag=12)
     model = ARIMA(differenced, order=order)
     model_fit = model.fit(disp=0)
     forecast = model_fit.forecast(12)[0]
     history = [x for x in train]
     for pred in forecast:
-        reverted = revert_difference(history, pred, lag=12)
+        reverted = _revert_difference(history, pred, lag=12)
         history.append(reverted)
     preds = np.array(history[-12:])
     
@@ -86,7 +86,7 @@ def predict_final_year(time_series, order=(12,1,2), search=False):
     print 'RMSE: ' + str(np.sqrt(mean_squared_error(test, preds)))
     print 'R_SQ: '+ str(r2_score(test, preds))
     plt.plot(test)
-    plt.plot(preds, color='red')
+    plt.plot(preds, color='red') 
     plt.show()
     
 def grid_search(dataset, p_values=range(13), d_values=range(3), q_values=range(3)):
