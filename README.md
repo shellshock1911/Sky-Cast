@@ -90,7 +90,7 @@ Note that the chosen set of parameters is not necessarily the optimum for all or
 
 The metric to be used for evaluating the performance of ARIMA and neural networks against each other is the Root Mean-Squared Error (RMSE) defined below:
 
-![Root Mean-Squared Error](./images/rmse.png)
+![Root Mean-Squared Error](./images/RMSE.png)
 
 Where *P<sub>i</sub>* equals the predicted value and *P<sub>i</sub>* equals the observed value for a given time step. 
 
