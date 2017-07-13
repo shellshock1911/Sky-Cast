@@ -27,7 +27,7 @@ def get_data(airline, airport, categories=["Passengers"]):
     # Date indexes are read in as unicode literals, dataparse will properly
     # reconvert them to DatetimeIndex format
     
-    data = pd.read_csv('./aviation_data/{}-{}.csv'.format(airline, airport), index_col='Date', 
+    data = pd.read_csv('../data/{}-{}.csv'.format(airline, airport), index_col='Date', 
                        parse_dates=True, date_parser=dateparse)
     
     # Returns DataFrame if more than one category is requested
@@ -37,7 +37,7 @@ def get_data(airline, airport, categories=["Passengers"]):
     
     # Returns Series if only one category is requested
     else:
-        return data['{}_Domestic'.format(category[0])].astype(np.float64)
+        return data['{}_Domestic'.format(categories[0])].astype(np.float64)
 
 
 def test_stationarity(time_series):
@@ -89,9 +89,6 @@ def _add_seasonality(history, pred, lag=1):
 
 def predict_final_year(time_series, order=(12,1,2), search=False):
     
-#   TODO: Make it possible to lag to varying distances in the past
-#         and forecast to varying distances in the future
-    
     data = time_series.values
     train, test = data[:-12], data[-12:]
     differenced = _remove_seasonality(train, lag=12)
@@ -109,11 +106,10 @@ def predict_final_year(time_series, order=(12,1,2), search=False):
     if search:
         return mean_squared_error(test, preds)
     
-    print 'RMSE: ' + str(np.sqrt(mean_squared_error(test, preds)))
-    print 'R_SQ: '+ str(r2_score(test, preds))
-    plt.plot(test)
-    plt.plot(preds, color='red') 
-    plt.show()
+    print('RMSE: ' + str(round(np.sqrt(mean_squared_error(test, preds)),3)))
+    print('R_SQ: '+ str(round(r2_score(test, preds),3)))
+    
+    return test, preds
     
 def grid_search(dataset, p_values=range(13), d_values=range(3), q_values=range(3)):
     best_score, best_cfg = float("inf"), None
